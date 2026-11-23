@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abrir Trello</title>
+<style>
+  /* Pantalla oscura con un botón grande al centro */
+  body { font-family: system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; gap: 16px; background: #111; color: #eee; }
+  a { display: block; padding: 18px 28px; border-radius: 999px; background: #2f80c4; color: #fff; text-decoration: none; font-size: 20px; }
+  a.chico { background: none; color: #aaa; font-size: 15px; padding: 6px; }
+  p { margin: 0; color: #aaa; }
+</style>
+</head>
+<body>
+<p id="msg">Abriendo Trello...</p>
+<!-- Ruta de Tasker que abre la app de Trello -->
+<a id="abrir" href="http://127.0.0.1:1821/trello">Abrir Trello</a>
+<!-- Respaldo: la web de tus tableros -->
+<a class="chico" href="https://trello.com/u/eduardo33078832/boards">Abrir en la web</a>
+<script>
+  // Intenta abrir solo; si Chrome lo frena, queda el botón
+  location.href = 'http://127.0.0.1:1821/trello';
+  // Si la app abrió, esta pestaña se va a segundo plano: intenta cerrarla
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) setTimeout(() => window.close(), 300);
+  });
+  setTimeout(() => { document.getElementById('msg').textContent = 'Si no se abrió solo, toca el botón.'; }, 1500);
+</script>
+</body>
+</html>
